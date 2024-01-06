@@ -1,10 +1,10 @@
-const { User, Book } = require('../models');
-const { signToken, AuthenticationError } = require('../utils/auth');
+const { User, Book } = require("../models");
+const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
     me: async (parent, { userId }) => {
-        return User.findOne({ _id: userId })
+      return User.findOne({ _id: userId });
     },
   },
 
@@ -20,26 +20,33 @@ const resolvers = {
       const profile = await Profile.findOne({ email });
 
       if (!profile) {
-        throw AuthenticationError
+        throw AuthenticationError;
       }
 
       const correctPw = await profile.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError
+        throw AuthenticationError;
       }
 
       const token = signToken(profile);
       return { token, profile };
     },
 
-    saveBook: async (parent,  { bookId, userId }) => {
+    saveBook: async (parent, { bookId }, context) => {
       const book = await Book.findOne({ bookId });
-      return User.findOneAndUpdate({_id: userId}, { $addToSet: { savedBooks: book }}, {
-        new: true,
-        runValidators: true,
-      })
 
+      if (context.user) {
+        return User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { savedBooks: book } },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
+      }
+      throw AuthenticationError;
     },
 
     removeBook: async (parent, { bookId }) => {
