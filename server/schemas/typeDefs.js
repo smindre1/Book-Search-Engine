@@ -1,9 +1,8 @@
 const typeDefs = `
     type Book {
-        _id: ID
+        bookId: ID!
         authors: [String]
         description: String
-        bookId: String!
         image: String
         link: String
         title: String!
@@ -13,6 +12,7 @@ const typeDefs = `
         _id: ID
         username: String!
         email: String!
+        bookCount: Int!
         password: String!
         savedBooks: [Book]
     }
@@ -27,10 +27,10 @@ const typeDefs = `
     }
 
     input BookContent {
+        bookId: ID!
         authors: [String]
         description: String
         title: String!
-        bookId: String!
         image: String
         link: String
     }
