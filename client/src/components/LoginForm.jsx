@@ -43,7 +43,6 @@ const LoginForm = () => {
       password: '',
     });
   };
-  };
 
   return (
     <>
