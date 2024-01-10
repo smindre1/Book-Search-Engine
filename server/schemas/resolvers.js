@@ -13,13 +13,10 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (parent, { name, email, password }, context) => {
-      if (context.user) {
-        const profile = await User.create({ name, email, password });
-        const token = signToken(profile);
-        return { token, profile };
-      }
-      throw AuthenticationError;
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      const token = signToken(user);
+      return { token, user };
     },
 
     login: async (parent, { email, password }) => {

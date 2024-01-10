@@ -22,10 +22,6 @@ const typeDefs = `
         user: User
       }
 
-    type Query {
-        me: User
-    }
-
     input BookContent {
         bookId: ID!
         authors: [String]
@@ -35,6 +31,10 @@ const typeDefs = `
         link: String
     }
 
+    type Query {
+        me: User
+    }
+
     type Mutation {
         addUser(username: String!, email: String!, password: String!): Auth
         login(email: String! password: String!): Auth
@@ -42,3 +42,5 @@ const typeDefs = `
         removeBook(bookId: String!): User
       }
 `;
+
+module.exports = typeDefs;
