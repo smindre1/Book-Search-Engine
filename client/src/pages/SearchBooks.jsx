@@ -11,13 +11,13 @@ import {
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import { saveBookIds, getSavedBookIds } from '../utils/localStorage'; //Not using this...
 
 const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
+  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds()); ///Is this needed
+  const [ saveBook, {data, error}] = useMutation(SAVE_BOOK);
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
 
   // create method to search for books and set state on form submit
@@ -44,7 +44,6 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
-
       setSearchedBooks(bookData);
       setSearchInput('');
     } catch (err) {
@@ -54,22 +53,17 @@ const SearchBooks = () => {
 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
-    console.log("THIS IS A TEST");
-    console.log(bookId);
-    const [ saveBook, {data, error}] = useMutation(SAVE_BOOK);
-
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-    console.log("THIS IS A TEST2");
     
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
     if (!token) {
       return false;
     }
 
     try {
+      //use token to submit save book......................
       const { data } = await saveBook({
         variables: {
           bookInfo: { ...bookToSave }
@@ -78,7 +72,6 @@ const SearchBooks = () => {
 
       // if book successfully saves to user's account, save book id to state
       // setSavedBookIds([...savedBookIds, bookToSave.bookId]);
-      console.log("test3");
     } catch (err) {
       console.error(err);
     }

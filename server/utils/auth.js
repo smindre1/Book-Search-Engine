@@ -27,7 +27,6 @@ module.exports = {
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
-      console.log({data}, req, 'alsdjfalsdfjalsdkjfalsdjflasjdflsaj')
     } catch {
       console.log('Invalid token');
     }
