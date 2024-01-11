@@ -49,6 +49,7 @@ const SavedBooks = () => {
       } catch (err) {
         console.error(err);
       }
+
     };
     
     // if data isn't here yet, say so
@@ -56,7 +57,7 @@ const SavedBooks = () => {
       return <h2>LOADING...</h2>;
     }
     
-    console.log(data, "data", userData);
+    // console.log(data, "data", userData);
     return (
       <>
       <div fluid className="text-light bg-dark p-5">
