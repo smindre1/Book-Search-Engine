@@ -9,11 +9,11 @@ const typeDefs = `
     }
 
     type User {
-        _id: ID
+        _id: ID!
         username: String!
-        email: String!
-        bookCount: Int!
-        password: String!
+        email: String
+        bookCount: Int
+        password: String
         savedBooks: [Book]
     }
 

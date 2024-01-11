@@ -15,7 +15,8 @@ const SavedBooks = () => {
 
   // const [userData, setUserData] = useState({});
   useEffect(() => {
-    console.log(Auth.loggedIn());
+    console.log(Auth.loggedIn(), data);
+
  });
   const userData = data?.me || {};
   // use this to determine if `useEffect()` hook needs to run again
@@ -55,7 +56,7 @@ const SavedBooks = () => {
       return <h2>LOADING...</h2>;
     }
     
-    console.log(data, "data");
+    console.log(data, "data", userData);
     return (
       <>
       <div fluid className="text-light bg-dark p-5">
