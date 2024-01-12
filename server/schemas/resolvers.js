@@ -38,12 +38,11 @@ const resolvers = {
 
     saveBook: async (parent, { bookInfo }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        return User.findByIdAndUpdate(
           { _id: context.user._id },
           { $push: { savedBooks: bookInfo } },
           {
             new: true,
-            runValidators: true,
           }
         );
       }
@@ -54,11 +53,10 @@ const resolvers = {
       if (context.user) {
         const result = User.findOneAndUpdate(
         { _id: context.user._id },
-          { $pull: { savedBooks:  {bookId} } },
+          { $pull: { savedBooks:  bookId } },
           {
             new: true,
           });
-          console.log(result, "result");
           return result;
       }
       

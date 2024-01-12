@@ -34,11 +34,11 @@ const LoginForm = () => {
       Auth.login(data.login.token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);  //Is this line needed maybe useEffect.
+      setShowAlert(true);
     }
 
     setUserFormData({
-      // username: '', //Line 10 does not include username, so do I need it?
+      // username: '', //Can be added for further security
       email: '',
       password: '',
     });
