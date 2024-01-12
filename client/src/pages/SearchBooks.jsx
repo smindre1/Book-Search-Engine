@@ -72,7 +72,7 @@ const SearchBooks = () => {
         variables: {
           bookInfo: { ...bookToSave }
         },
-      });
+      }, token);
       // if book successfully saves to user's account, save book id to state
       const bookList = getSavedBookIds();
       setSavedBookIds([...bookList, bookToSave.bookId]);

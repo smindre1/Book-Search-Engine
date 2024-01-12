@@ -38,7 +38,7 @@ const resolvers = {
 
     saveBook: async (parent, { bookInfo }, context) => {
       if (context.user) {
-        return User.findByIdAndUpdate(
+        return User.findOneAndUpdate(
           { _id: context.user._id },
           { $push: { savedBooks: bookInfo } },
           {
@@ -53,7 +53,7 @@ const resolvers = {
       if (context.user) {
         const result = User.findOneAndUpdate(
         { _id: context.user._id },
-          { $pull: { savedBooks:  bookId } },
+          { $pull: { savedBooks:  {bookId} } },
           {
             new: true,
           });
