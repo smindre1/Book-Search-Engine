@@ -16,9 +16,11 @@ const SearchBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // console.log(Auth.loggedIn());
+
   useEffect(() => {
     if (!loading) {
       const savedBooks = data?.me.savedBooks || [];
+      console.log(savedBooks, "saved");
       const newArray = savedBooks.map((element) => element.bookId);
       return () => saveBookIds(newArray);
     }
