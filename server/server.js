@@ -6,8 +6,6 @@ const path = require("path");
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 const { authMiddleware } = require("./utils/auth");
-//Delete routes later...
-// const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;

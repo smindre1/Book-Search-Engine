@@ -25,9 +25,6 @@ const SavedBooks = () => {
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    useEffect(() => {
-     console.log(Auth.loggedIn());
-  });
     if (!token) {
       return false;
     }
@@ -36,15 +33,7 @@ const SavedBooks = () => {
       const { data } = await removeBook({
         variables: { bookId },
       });
-      // const response = await deleteBook(bookId, token);
-      
-      // if (!response.ok) {
-        //   throw new Error('something went wrong!');
-        // }
-        
-        // const updatedUser = await response.json();
-        // setUserData(updatedUser);
-        // upon success, remove book's id from localStorage
+        console.log(data);
         removeBookId(bookId);
       } catch (err) {
         console.error(err);

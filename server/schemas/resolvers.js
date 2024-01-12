@@ -52,14 +52,17 @@ const resolvers = {
 
     removeBook: async (parent, { bookId }, context) => {
       if (context.user) {
-        return User.findOneAndUpdate(
+        const result = User.findOneAndUpdate(
         { _id: context.user._id },
-          { $pull: { savedBooks: bookId } },
+          { $pull: { savedBooks:  {bookId} } },
           {
             new: true,
-            runValidators: true,
           });
+          console.log(result, "result");
+          return result;
       }
+      
+
       throw AuthenticationError;
     },
   },
