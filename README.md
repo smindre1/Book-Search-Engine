@@ -4,7 +4,7 @@ By `Shane Mindreau`
 
 (Base code provided by Colombia University's Fullstack Coding Bootcamp)
 
-Deployed App With Heroku: [`Present List App`](https://protected-thicket-58490-c1d60fd1c323.herokuapp.com/)
+Deployed App With Heroku: [`Book Search Engine App`](https://protected-thicket-58490-c1d60fd1c323.herokuapp.com/)
 
 ## Description
 
